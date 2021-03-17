@@ -1,24 +1,30 @@
-# vue-plugin-test
+# ui-logging-charts
+##录井图图形组件库
 
-## Project setup
+## 打包
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+npm run lib
 ```
 
-### Compiles and minifies for production
+### 发包
 ```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+npm publish
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 在其他项目中应用
+```
+安装
+npm install ui-logging-charts --s
+
+引入 (store为项目中vuex的store)
+import LoggingChart from 'ui-logging-charts'
+Vue.use(LoggingChart, {store}) 
+
+
+```
+
+### 运行examples
+```
+npm run serve
+```
+
