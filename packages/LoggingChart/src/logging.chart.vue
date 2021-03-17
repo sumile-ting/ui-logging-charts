@@ -26,7 +26,7 @@
     import TextHeader from './components/scalechart/textHeader'
     import ScaleBody from './components/scalechart/scaleBody'
     import {mmToPX} from "../../util/common";
-    import {store} from '../../store/store'
+     import { mapState } from 'vuex'
 
     export default {
         name: 'LoggingChart',
@@ -70,10 +70,7 @@
             }
         },
         computed: {
-            // ...mapState(['templates']),
-            // template() {
-            //   return store.state.templates
-            // },
+            ...mapState(['templates']),
             chartBodyHeight() {
                 let dataLength = this.depthMax - this.depthMin;
                 const scale = (this.vScale || 100) / 100;
@@ -108,12 +105,10 @@
                     'end': max,
                     xcType: this.xcType
                 }
-                console.log(store)
-                const allData = await getwellbore(store.state.templates[this.templateId], params);
-                var template = store.state.templates[this.templateId] || JSON.parse(allData.template);
-                // this.$store.dispatch('template/setTemplateAction', {
-                //     templateId: this.templateId, template });
-                store.setTemplateAction(this.templateId, template)
+                const allData = await getwellbore(this.$store.state.templates[this.templateId], params);
+                var template = this.$store.state.templates[this.templateId] || JSON.parse(allData.template);
+                this.$store.dispatch('setTemplateAction', {
+                    templateId: this.templateId, template });
                 this.initChart(template, allData)
             },
             initChart(template, allData) {
