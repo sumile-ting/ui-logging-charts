@@ -47,7 +47,7 @@ Highcharts.setOptions({
         },
         formatter: function () {
             let seriesName = this.series.name;
-            if (seriesName.indexOf("Series ") === 0) {
+            if (seriesName.startsWith("Series")) {
                 return false;
             }
             return `深度: ${this.x} m<br/>${seriesName}: ${this.y}`;

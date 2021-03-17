@@ -1,7 +1,7 @@
 # ui-logging-charts
 ##录井图图形组件库
 
-## 打包
+##打包
 ```
 npm run lib
 ```

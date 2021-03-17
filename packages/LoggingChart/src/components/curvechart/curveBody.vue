@@ -58,10 +58,13 @@
               let points = this.points;
               for(let i = 0; i < points.length; i++) {
                   let series = points[i].series;
-                  var title = series.name.split("-")[0];
-                  var displayName = template.displayName[title] || title;
-                  var number = points[i].point.addition || points[i].point.y;
-                  a += "<span class='prompt' style='color:" + series.color + "'>" + (displayName) + ': ' + number + "</span><br>";
+                  if(!series.name.startsWith('Series') && points[i].point.isInside) {
+                    const title = series.name.split("-")[0];
+                    const displayName = template.displayName[title] || title;
+                    const number = points[i].point.addition || points[i].point.y;
+                    a += "<span class='prompt' style='color:" + series.color + "'>" + (displayName) + ': ' + number + "</span><br>";
+                  }
+
               }
               return a;
           }
