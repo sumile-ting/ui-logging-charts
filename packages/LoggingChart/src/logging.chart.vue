@@ -25,12 +25,13 @@
     import CurveBody from './components/curvechart/curveBody'
     import TextHeader from './components/scalechart/textHeader'
     import ScaleBody from './components/scalechart/scaleBody'
+    import yxBody from "./components/yxchart/yxBody";
     import {mmToPX} from "../../util/common";
      import { mapState } from 'vuex'
 
     export default {
         name: 'LoggingChart',
-        components: {Chart, CurveHeader, CurveBody, TextHeader, ScaleBody },
+        components: {Chart, CurveHeader, CurveBody, TextHeader, ScaleBody, yxBody },
         props: {
             templateId: {
                 type: String,
@@ -140,7 +141,7 @@
     font-size: 12px;
     font-family: 'SimSun';
     overflow: auto;
-    position: relative;
+    /*position: relative;*/
     margin: 0px auto;
     background-color: #ffffff;
   }

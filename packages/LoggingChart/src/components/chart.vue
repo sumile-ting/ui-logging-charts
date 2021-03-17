@@ -105,4 +105,7 @@
     border-top: none;
     position: absolute;
   }
+  .chart-inner-wrapper {
+    position: absolute;
+  }
 </style>

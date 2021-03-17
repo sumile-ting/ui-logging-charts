@@ -162,6 +162,7 @@ class scaleChart extends BasicChart {
   _getDimensions() {
     this.cfg.width = parseInt(this.selection.node().offsetWidth);
     this.cfg.height = parseInt(this.selection.node().offsetHeight);
+    this.element.parentElement.parentElement.style.zIndex = '999';
   }
 }
 
