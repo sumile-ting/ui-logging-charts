@@ -1,6 +1,5 @@
 /**
  * 模板中图道的type到对应道头组件的映射
- * @type {{logcurve: string, curve: string, scale: string}}
  */
 export const CHART_HEADER_TRANSFORM_MAP = {
   curve: 'curveHeader',
@@ -10,7 +9,6 @@ export const CHART_HEADER_TRANSFORM_MAP = {
 
 /**
  * 模板中图道的type到对应道体组件的映射
- * @type {{logcurve: string, curve: string, scale: string}}
  */
 export const CHART_BODY_TRANSFORM_MAP = {
   curve: 'curveBody',
@@ -20,7 +18,6 @@ export const CHART_BODY_TRANSFORM_MAP = {
 
 /**
  * 曲线填充base64
- * @type {{shale: string, slant_gridding: string, dolo: string, right_line: string, line: string, lime: string, dot: string, gridding: string, vertical: string, left_line: string}}
  * @private
  */
 export const _FILL_LEGEND_BASE64 =  {

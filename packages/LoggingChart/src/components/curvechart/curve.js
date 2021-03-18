@@ -45,7 +45,7 @@ class curveChart extends BasicChart {
     this.cfg.titles.forEach((t, i) => {
       let minMax = this.config.minMax[t];
       minMax = [Number(minMax[0]), Number(minMax[1])];
-      const isLog = this.config.isLog[t];
+      const isLog = this.config.isLog && this.config.isLog[t];
       const yAxisType =  isLog ? 'logarithmic':  'linear';
       const min = minMax[0];
       const max = minMax[1];
@@ -84,7 +84,14 @@ class curveChart extends BasicChart {
     return this._getYAxis();
   }
 
-  _getSeriesExtendOption(curveType, lineWidth) {
+    /**
+     * 获取series的扩展属性，区分左杆状、曲线+marker和普通 曲线类型
+     * @param curveType
+     * @param lineWidth
+     * @private
+     */
+  _getSeriesExtendOption(title, lineWidth) {
+    const curveType = this.config.curveType ? this.config.curveType[title] : 'line';
     let seriesOpt = {};
       if(curveType == 'hLine') {
         seriesOpt = {grouping: false, shadow: false, pointWidth: lineWidth,  pointPlacement: 'on', type: 'column'}
@@ -105,7 +112,7 @@ class curveChart extends BasicChart {
       const points = this.data[t.split('-')[0]];
       const copyPoints = Object.assign([], points);
       let lineWidth = this.config.lineWidth[t];
-      const seriesOpt = this._getSeriesExtendOption(this.config.curveType[t], lineWidth);
+      const seriesOpt = this._getSeriesExtendOption(t, lineWidth);
       const crossBorderHandler = this.config.crossBorderHandler[t] ? this.config.crossBorderHandler[t].value : undefined;
       if (crossBorderHandler) {
         let seriesData = this._crossBorderDataHandle(copyPoints, t);
@@ -221,17 +228,15 @@ class curveChart extends BasicChart {
    *
    * @returns {Array}
    */
-  _getColorCodeFillData(fill, data, isLog, title) {
+  _getColorCodeFillData(fill, data, title) {
     var datas = {
       lowhigh: [],
       differs: []
     };
     var from = fill.from;
     var to = fill.to;
-    var minMax = this._findMaxMin(from, data);
-    if (isLog) minMax = this._findLogMaxMin(from);
-    var toMinMax = this._findMaxMin(to, data);
-    if (isLog) toMinMax = this._findLogMaxMin(to);
+    var minMax = this._findMaxMin(from);
+    var toMinMax = this._findMaxMin(to);
     data[from] = (data[from.split('-')[0]] || []);
     data[to] = (data[to.split('-')[0]] || []);
     if (!minMax) {
@@ -275,13 +280,13 @@ class curveChart extends BasicChart {
    * @param isLog
    * @param data
    */
-  _pushColorCodeFillSeris(fillDatas, fill, isLog, data, title) {
+  _pushColorCodeFillSeris(fillDatas, fill, data, title) {
     var ser = this._getPublicColorCodeFillSerObject();
-    var all = this._getColorCodeFillData(fill, data, isLog, title);
+    var all = this._getColorCodeFillData(fill, data, title);
     var datas = all['lowhigh'];
     var differs = all['differs'];
-    var min = differs.min();
-    var max = differs.max();
+    var min = Math.min.apply(null, differs);
+    var max = Math.max.apply(null, differs);
     var colorScale = getColorLineScale(min, max, fill.fillType);
     datas.forEach((d, i) => {
       d.color = colorScale(differs[i]);
@@ -326,18 +331,17 @@ class curveChart extends BasicChart {
    * @param data
    * @param isLog
    */
-  _getbetweenFillData(fill, data, isLog, policy) {
+  _getbetweenFillData(fill, data, policy) {
     var datas = [];
     var from = fill.from;
     var to = fill.to;
-    var style = isLog ? 'log' : 'liner';
-    var minMax = this._findMinMax(from, data, style);
-    var toMinMax = this._findMinMax(to, data, style);
-    if (isLog) {
-      // var extremes = getyAxesFromId(chart, from).getExtremes();
-      minMax = [Math.log10(minMax[0]), Math.log10(minMax[1])];
-      // var toExt = getyAxesFromId(chart, to).getExtremes();
-      toMinMax = [Math.log10(toMinMax[0]), Math.log10(toMinMax[1])];
+    var minMax = this._findMaxMin(from);
+    var toMinMax = this._findMaxMin(to);
+    if(this.config.isLog  && this.config.isLog[from]) {
+        minMax = [Math.log10(minMax[0]), Math.log10(minMax[1])];
+    }
+    if(this.config.isLog && this.config.isLog[to]) {
+        toMinMax = [Math.log10(toMinMax[0]), Math.log10(toMinMax[1])];
     }
     var sacle = getLineScale(toMinMax[0], toMinMax[1], minMax[0], minMax[1]);
     var fromData = data[from.split('-')[0]];
@@ -345,7 +349,7 @@ class curveChart extends BasicChart {
     if (!fromData || !toData) return;
     fromData.forEach((from, i) => {
       if (toData[i]) {
-        if (isLog) {
+        if (this.config.isLog && this.config.isLog[from]) {
           toData[i].y = Math.pow(10, sacle(Math.log10(toData[i].y)));
         } else {
           toData[i].y = sacle(toData[i].y);
@@ -413,7 +417,7 @@ class curveChart extends BasicChart {
    * @param data
    * @param policy
    */
-  _pushFillSeris(fillDatas, fill, isLog, data, policy) {
+  _pushFillSeris(fillDatas, fill, data, policy) {
     var fillColor, fillShap;
     if (policy === 'low') {
       fillColor = fill['lessColor'], fillShap = fill['shap'];
@@ -423,11 +427,11 @@ class curveChart extends BasicChart {
     }
     var ser = this._getPublicFillSerObject(fill, fillColor, fillShap);
     if (fill['isbetween']) {
-      var betweenFillDatas = this._getbetweenFillData(fill, data, isLog, policy);
+      var betweenFillDatas = this._getbetweenFillData(fill, data, policy);
       ser.yAxis = fill.from;
       ser.data = betweenFillDatas;
     } else {
-      var datas = this._getfillData(fill, data, isLog, policy);
+      var datas = this._getfillData(fill, data, policy);
       ser.yAxis = fill.title;
       ser.data = datas;
     }
@@ -440,15 +444,12 @@ class curveChart extends BasicChart {
    * @param data
    * @param fillTar
    */
-  _getfillData(fill, data, isLog, policy) {
+  _getfillData(fill, data, policy) {
     var datas = [];
     var from = fill.from.split('-')[0];
     var to = fill.to.split('-')[0];
     var title = fill.title;
-    var minMax = this._findMaxMin(title, data);
-    if (isLog) {
-      minMax = this._findLogMaxMin(title);
-    }
+    var minMax = this._findMaxMin(title);
     if (from === 'max') from = minMax[1];
     else if (from === 'min') from = minMax[0];
     else if (data[from]) from = data[from.split('-')[0]];
@@ -477,7 +478,7 @@ class curveChart extends BasicChart {
    * @param title
    * @param data
    */
-  _fillSeries(title, data, isLog, template) {
+  _fillSeries(title, data, template) {
     var fills = template['fills'];
     if (!fills) return [];
     var fillTar = fills[title];
@@ -486,12 +487,12 @@ class curveChart extends BasicChart {
     var fillDatas = [];
     fillTar.forEach((fill) => {
       if (fill['fillType']) {
-        this._pushColorCodeFillSeris(fillDatas, fill, isLog, data, fill.title);
+        this._pushColorCodeFillSeris(fillDatas, fill, data, fill.title);
       } else { // 纯色和图案填充， 如果是图案，把fill.shap = 'none',
         if (fill['lessColor'])
-          this._pushFillSeris(fillDatas, fill, isLog, data, 'low');
+          this._pushFillSeris(fillDatas, fill, data, 'low');
         if (fill['moreColor'])
-          this._pushFillSeris(fillDatas, fill, isLog, data, 'high');
+          this._pushFillSeris(fillDatas, fill, data, 'high');
       }
     });
     return fillDatas;
@@ -500,8 +501,8 @@ class curveChart extends BasicChart {
   /**
    * 添加填充曲线
    */
-  addFillSeries(isLog) {
-    return this._fillSeries(this.cfg.titles.join('-'), this.data, isLog, this.config)
+  addFillSeries() {
+    return this._fillSeries(this.cfg.titles.join('-'), this.data, this.config)
   }
 }
 
