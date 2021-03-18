@@ -4,7 +4,6 @@
  */
 export const CHART_HEADER_TRANSFORM_MAP = {
   curve: 'curveHeader',
-  logcurve: 'curveHeader',
   scale: 'textHeader',
   yx: 'textHeader',
 }
@@ -15,9 +14,8 @@ export const CHART_HEADER_TRANSFORM_MAP = {
  */
 export const CHART_BODY_TRANSFORM_MAP = {
   curve: 'curveBody',
-  logcurve: 'curveBody',
   scale: 'scaleBody',
-  yx: 'yxBody'
+  yx: 'yxBody',
 }
 
 /**

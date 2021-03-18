@@ -40,49 +40,24 @@ class curveChart extends BasicChart {
   /**
    * 获取线性Y轴坐标
    */
-  _getLinearYAxis() {
+  _getYAxis() {
     const yAxis = [];
     this.cfg.titles.forEach((t, i) => {
       let minMax = this.config.minMax[t];
       minMax = [Number(minMax[0]), Number(minMax[1])];
-      const tickOption = this._getTickPositions(minMax);
-      yAxis.push({
-        id: t,
-        type: 'linear',
-        min: minMax[0],
-        max: minMax[1],
-        endOnTick: false,
-        startOnTick: false,
-        tickPositions: tickOption.tickPositions,
-        lineWidth: 0,
-        labels: {
-          enabled: false
-        },
-        title: {
-          enabled: false
-        },
-        visible: i == 0
-      })
-    })
-    return yAxis;
-  }
-
-  _getLogYAxis() {
-    const yAxis = [];
-    this.cfg.titles.forEach((t, i) => {
-      let minMax = this.config.minMax[t];
-      minMax = [Number(minMax[0]), Number(minMax[1])];
+      const isLog = this.config.isLog[t];
+      const yAxisType =  isLog ? 'logarithmic':  'linear';
       const min = minMax[0];
       const max = minMax[1];
-      const isReversed = min > max;
-      yAxis.push({
+      const isReversed = isLog && min > max;
+      const y = {
         id: t,
-        type: 'logarithmic',
+        type: yAxisType,
         min: isReversed ? max : min,
         max: isReversed ? min : max,
         endOnTick: false,
         startOnTick: false,
-        minorTickInterval: 0.1,
+
         lineWidth: 0,
         labels: {
           enabled: false
@@ -92,7 +67,12 @@ class curveChart extends BasicChart {
         },
         reversed: isReversed,
         visible: i == 0
-      })
+      }
+      if(isLog) {
+        yAxis.push(Object.assign({ minorTickInterval: 0.1}, y));
+      } else {
+        yAxis.push(Object.assign({ tickAmount: 10}, y));
+      }
     })
     return yAxis;
   }
@@ -100,12 +80,20 @@ class curveChart extends BasicChart {
   /**
    * 获取Y轴坐标
    */
-  getYAxis(isLog) {
-    if (isLog) {
-      return this._getLogYAxis()
-    } else {
-      return this._getLinearYAxis()
-    }
+  getYAxis() {
+    return this._getYAxis();
+  }
+
+  _getSeriesExtendOption(curveType, lineWidth) {
+    let seriesOpt = {};
+      if(curveType == 'hLine') {
+        seriesOpt = {grouping: false, shadow: false, pointWidth: lineWidth,  pointPlacement: 'on', type: 'column'}
+      } else if (curveType == 'scattercurve') {
+        seriesOpt = {type: 'line', marker: {enabled: true, symbol: 'circle'}};
+      } else {
+        seriesOpt = {type: 'line'};
+      }
+      return seriesOpt
   }
 
   /**
@@ -117,23 +105,25 @@ class curveChart extends BasicChart {
       const points = this.data[t.split('-')[0]];
       const copyPoints = Object.assign([], points);
       let lineWidth = this.config.lineWidth[t];
+      const seriesOpt = this._getSeriesExtendOption(this.config.curveType[t], lineWidth);
       const crossBorderHandler = this.config.crossBorderHandler[t] ? this.config.crossBorderHandler[t].value : undefined;
       if (crossBorderHandler) {
         let seriesData = this._crossBorderDataHandle(copyPoints, t);
         let crossBorderCurveColor = (this.config.crossBorderHandler[t].color || this.config.colors[t]);
         let crossBorderCurveDashstyle = this.config.crossBorderHandler[t].dashstyle || this.config.dashstyle[t];
         let crossBorderCurveLineWidth = this.config.crossBorderHandler[t].lineWidth || lineWidth;
-        series.push({
+        const serie = {
           dashStyle: crossBorderCurveDashstyle,
           lineWidth: crossBorderCurveLineWidth,
           color: crossBorderCurveColor,
           yAxis: t,
           name: t,
           turboThreshold: 0,
-          data: seriesData
-        })
+          data: seriesData,
+        };
+        series.push(Object.assign({}, seriesOpt, serie))
       }
-      series.push({
+      const serie = {
         id: 'series_' + t,
         lineWidth: lineWidth,
         name: t,
@@ -141,8 +131,10 @@ class curveChart extends BasicChart {
         yAxis: t,
         data: points,
         turboThreshold: 0,
-        dashStyle: this.config.dashstyle[t],
-      })
+        dashStyle: this.config.dashstyle[t]
+      };
+
+      series.push(Object.assign({}, seriesOpt, serie));
     })
     return series;
   }

@@ -21,7 +21,7 @@ export default class LithologyChart extends BasicChart {
     initChart() {
         this._setDimensions();
         let lithologyData = this._transf(this.data[this.cfg.titles[0]]);
-        const ctrlWidth = this.config.ctrlWidth === 'true'
+        const ctrlWidth = this.config.yxSetting.ctrlWidth === 'true'
         const renderer = new Highcharts.Renderer(this.element, this.cfg.width, this.cfg.height);
         let groups = this._getGroups(this.data[this.cfg.titles[0]], renderer, ctrlWidth); // 加载图案
         this._drawYxImage(renderer, lithologyData, groups, ctrlWidth);

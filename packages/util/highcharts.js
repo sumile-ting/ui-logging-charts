@@ -15,7 +15,7 @@ Highcharts.setOptions({
            },
           states: {
               hover: {
-                enabled: false
+               enabled: false
               }
           },
           animation: false

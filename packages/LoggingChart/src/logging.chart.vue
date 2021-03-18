@@ -27,7 +27,7 @@
     import ScaleBody from './components/scalechart/scaleBody'
     import yxBody from "./components/yxchart/yxBody";
     import {mmToPX} from "../../util/common";
-     import { mapState } from 'vuex'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'LoggingChart',
@@ -106,8 +106,13 @@
                     'end': max,
                     xcType: this.xcType
                 }
-                const allData = await getwellbore(this.$store.state.templates[this.templateId], params);
-                var template = this.$store.state.templates[this.templateId] || JSON.parse(allData.template);
+                const localTemp = JSON.parse(window.localStorage.getItem(this.templateId));
+                if(!this.$store.state.templates.templates[this.templateId]) {
+                    this.$store.dispatch('setTemplateAction', {
+                        templateId: this.templateId, template: localTemp });
+                }
+                const allData = await getwellbore(this.$store.state.templates.templates[this.templateId], params);
+                var template = this.$store.state.templates.templates[this.templateId] || JSON.parse(allData.template);
                 this.$store.dispatch('setTemplateAction', {
                     templateId: this.templateId, template });
                 this.initChart(template, allData)

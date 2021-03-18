@@ -69,9 +69,8 @@
               return a;
           }
       }
-      const isLog = this.config.headerSettings[this.index].isLog;
-      this.chartOptions.yAxis = this.chart.getYAxis(isLog);
-      this.chartOptions.series = [ ...this.chart.addFillSeries(isLog), ...this.chart.addCurveSeries()];
+      this.chartOptions.yAxis = this.chart.getYAxis();
+      this.chartOptions.series = [ ...this.chart.addFillSeries(), ...this.chart.addCurveSeries()];
     },
     beforeDestroy() {
         // this.$refs.highcharts.destroy()

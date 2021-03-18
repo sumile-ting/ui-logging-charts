@@ -1,0 +1,300 @@
+{
+	"titles": [
+		["zs"],
+		["c1", "qt"],
+		["sdb", "ft"],
+		["JS"],
+		["YX"],
+		["xdyhl", "yxzs"]
+	],
+	"width": [40, 40, 40.79, 13, 30, 40],
+	"colors": {
+		"dritime": "#000",
+		"zs": "#000",
+		"qt": "#ff0000",
+		"ft": "#ff0000",
+		"sdb": "#0000ff",
+		"c1": "#00cc00",
+		"yxzs": "#000",
+		"dbjb": "#000",
+		"yxzs-5-1": "#000",
+		"ys": "#000",
+		"xdyhl": "#000"
+	},
+	"dashstyle": {
+		"qt": "Solid",
+		"sdb": "Solid",
+		"zs": "Solid",
+		"yxzs": "Solid",
+		"xdyhl": "Solid"
+	},
+	"minMax": {
+		"dritime": [0, 30],
+		"zs": [0, 5],
+		"qt": [0, 10],
+		"ft": [0.1, 100],
+		"sdb": [0.1, 100],
+		"c1": [0, 5],
+		"yxzs": [0, 50],
+		"dbjb": [0, 20],
+		"yxzs-5-1": [0, 50],
+		"ys": [0, 10],
+		"xdyhl": [0, 200]
+	},
+	"type": {
+		"JS": "scale",
+		"dritime": "curve",
+		"zs": "curve",
+		"qt": "curve",
+		"ft": "curve",
+		"sdb": "curve",
+		"c1": "curve",
+		"YX": "yx",
+		"yxzs": "curve",
+		"dbjb": "curve",
+		"yxzs-5-1": "curve",
+		"ys": "curve",
+		"xdyhl": "curve"
+	},
+	"curveType": {
+		"zs": "curve",
+		"c1": "curve",
+		"qt": "curve",
+		"sdb": "curve",
+		"ft": "curve",
+		"yxzs": "hLine",
+		"xdyhl": "scattercurve"
+	},
+	"isLog": {
+	   	"zs": false,
+		"c1": false,
+		"qt": false,
+		"sdb": true,
+		"ft": true,
+		"yxzs": false,
+		"xdyhl": false
+	},
+	"fills": {
+		"qt": [],
+		"sdb-ft": [{
+			"title": "sdb-ft",
+			"from": "sdb",
+			"to": "ft",
+			"lessColor": "#ff0000",
+			"moreColor": "#0000ff",
+			"shap": "none",
+			"moreShap": "none",
+			"isbetween": true,
+			"fillType": ""
+		}],
+		"zs": [],
+		"dbjb-yxzs": []
+	},
+	"headerHeight": 40,
+	"headerSetting": {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	},
+	"displayName": {
+		"dritime": "钻时",
+		"zs": "钻时",
+		"qt": "全烃",
+		"JS": "深度",
+		"ft": "非烃",
+		"sdb": "湿度比",
+		"c1": "甲烷",
+		"YX": "岩性",
+		"yxzs": "油性指数",
+		"dbjb": "对比级",
+		"yxzs-5-1": "油性指数",
+		"ys": "YS",
+		"xdyhl": "相当油含量"
+	},
+	"unit": {},
+	"lineWidth": {
+		"dritime": 1,
+		"zs": 1,
+		"qt": 1,
+		"ft": 1,
+		"sdb": 1,
+		"c1": 1,
+		"yxzs": 1,
+		"dbjb": 1,
+		"yxzs-5-1": 1,
+		"ys": 1,
+		"xdyhl": 1
+	},
+	"fontSize": {
+		"qt": {
+			"value": "12px",
+			"label": "小五"
+		},
+		"sdb": {
+			"value": "12px",
+			"label": "小五"
+		},
+		"zs": {
+			"value": "12px",
+			"label": "小五"
+		},
+		"YX": {
+			"value": "14px",
+			"label": "五号"
+		},
+		"yxzs": {
+			"value": "12px",
+			"label": "小五"
+		}
+	},
+	"fontFamily": {
+		"qt": {
+			"label": "宋体",
+			"value": "SimSun"
+		},
+		"sdb": {
+			"label": "宋体",
+			"value": "SimSun"
+		},
+		"zs": {
+			"label": "宋体",
+			"value": "SimSun"
+		},
+		"YX": {
+			"label": "宋体",
+			"value": "SimSun"
+		},
+		"yxzs": {
+			"label": "宋体",
+			"value": "SimSun"
+		}
+	},
+	"fontColor": {
+		"qt": "#000",
+		"sdb": "#000",
+		"zs": "#000",
+		"YX": "#000",
+		"yxzs": "#000"
+	},
+	"fontStyle": {
+		"qt": {
+			"label": "常规",
+			"value": "font-style: normal; font-weight: normal;"
+		},
+		"sdb": {
+			"label": "常规",
+			"value": "font-style: normal; font-weight: normal;"
+		},
+		"zs": {
+			"label": "常规",
+			"value": "font-style: normal; font-weight: normal;"
+		},
+		"YX": {
+			"label": "常规",
+			"value": "font-style: normal; font-weight: normal;"
+		},
+		"yxzs": {
+			"label": "常规",
+			"value": "font-style: normal; font-weight: normal;"
+		}
+	},
+	"crossBorderHandler": {
+		"qt": {
+			"label": "不显示",
+			"value": 0,
+			"dashstyle": "Solid"
+		},
+		"sdb": {
+			"label": "不显示",
+			"value": 0,
+			"dashstyle": "Solid"
+		},
+		"zs": {
+			"label": "越界折返",
+			"value": 1,
+			"color": "#ff0000",
+			"dashstyle": "Solid",
+			"lineWidth": 1
+		},
+		"yxzs": {
+			"label": "不显示",
+			"value": 0,
+			"dashstyle": "Solid"
+		}
+	},
+	"headerTitles": [{
+		"name": "数据曲线fb995f84-bf38-e331-4f82-22ad846a4b70",
+		"visible": false,
+		"showChart": true
+	}, {
+		"name": "数据曲线f646f4e3-867f-33cb-eafc-5a710efa13c6",
+		"visible": false,
+		"showChart": true
+	}, {
+		"name": "数据曲线20c99011-fe75-d10e-03b2-c17acbf095d3",
+		"visible": false,
+		"showChart": true
+	}, {
+		"name": "深度dacfe5c6-f080-ac4a-7a2e-1fa649e88de7",
+		"visible": false,
+		"showChart": true
+	}, {
+		"name": "岩性92550694-76e6-8277-d4d7-0d08e7401625",
+		"visible": false,
+		"showChart": true
+	}, {
+		"name": "离散数据图道c2644453-b732-48c8-f747-742f843b8dd6",
+		"visible": false,
+		"showChart": true
+	}],
+	"headerSettings": [{
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": true
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
+	}],
+	"tempId": "templateId_db5c722c-4e9c-4bd7-b049-5ec0391ac74e",
+	"yxSetting": {
+		"ctrlWidth": "true"
+	},
+	"gridLineStyle": {
+		"qt": "Solid",
+		"sdb": "Solid",
+		"zs": "Solid",
+		"yxzs": "Solid"
+	},
+	"settingWidth": 40
+}
