@@ -34,6 +34,7 @@ export default class LithologyChart extends BasicChart {
     _setDimensions() {
         this.cfg.width = this.element.offsetWidth;
         this.cfg.height = this.element.offsetHeight;
+        this.element.parentElement.parentElement.style.zIndex = '99';
     }
 
     /**

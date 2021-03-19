@@ -26,12 +26,13 @@
     import TextHeader from './components/scalechart/textHeader'
     import ScaleBody from './components/scalechart/scaleBody'
     import yxBody from "./components/yxchart/yxBody";
+    import DepthSymbolBody from "./components/depthSymbolChart/depthSymbolBody";
     import {mmToPX} from "../../util/common";
     import { mapState } from 'vuex'
 
     export default {
         name: 'LoggingChart',
-        components: {Chart, CurveHeader, CurveBody, TextHeader, ScaleBody, yxBody },
+        components: {Chart, CurveHeader, CurveBody, TextHeader, ScaleBody, yxBody, DepthSymbolBody },
         props: {
             templateId: {
                 type: String,

@@ -35,6 +35,23 @@ export function mmToPX(val) {
 }
 
 /**
+ * 获得字符串的可视宽度
+ * @param fontSize
+ * @param fontFamily
+ * @returns {number}
+ */
+String.prototype.visualLength = function (fontSize = '12px', fontFamily = 'SimSun') {
+    let span = document.createElement("span");
+    span.innerHTML = `${this}`;
+    span.style.fontSize = fontSize;
+    span.style.fontFamily = fontFamily;
+    document.body.appendChild(span);
+    let size = span.offsetWidth;
+    span.remove();
+    return size;
+}
+
+/**
  * 获取线性比例尺
  * @param domainMin
  * @param domainMax

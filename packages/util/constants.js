@@ -5,6 +5,7 @@ export const CHART_HEADER_TRANSFORM_MAP = {
   curve: 'curveHeader',
   scale: 'textHeader',
   yx: 'textHeader',
+  depthSymbol: 'textHeader',
 }
 
 /**
@@ -14,6 +15,7 @@ export const CHART_BODY_TRANSFORM_MAP = {
   curve: 'curveBody',
   scale: 'scaleBody',
   yx: 'yxBody',
+  depthSymbol: 'depthSymbolBody',
 }
 
 /**
