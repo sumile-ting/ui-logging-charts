@@ -70,7 +70,7 @@
           }
       }
       this.chartOptions.yAxis = this.chart.getYAxis();
-      this.chartOptions.series = [ ...this.chart.addFillSeries(), ...this.chart.addCurveSeries()];
+      this.chartOptions.series = [  ...this.chart.addCurveSeries(), ...this.chart.addFillSeries()];
     },
     beforeDestroy() {
         // this.$refs.highcharts.destroy()

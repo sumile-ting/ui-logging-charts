@@ -5,9 +5,10 @@
 		["sdb", "ft"],
 		["JS"],
 		["YX"],
-		["xdyhl", "yxzs"]
+		["xdyhl", "yxzs"],
+		["JDG"]
 	],
-	"width": [40, 40, 40.79, 13, 30, 40],
+	"width": [40, 40, 40.79, 13, 30, 40, 30],
 	"colors": {
 		"dritime": "#000",
 		"zs": "#000",
@@ -54,41 +55,32 @@
 		"dbjb": "curve",
 		"yxzs-5-1": "curve",
 		"ys": "curve",
-		"xdyhl": "curve"
-	},
-	"curveType": {
-		"zs": "curve",
-		"c1": "curve",
-		"qt": "curve",
-		"sdb": "curve",
-		"ft": "curve",
-		"yxzs": "hLine",
-		"xdyhl": "scattercurve"
+		"xdyhl": "curve",
+		"JDG": "depthSymbol"
 	},
 	"isLog": {
-	   	"zs": false,
-		"c1": false,
-		"qt": false,
-		"sdb": true,
 		"ft": true,
-		"yxzs": false,
-		"xdyhl": false
+		"sdb": true
 	},
 	"fills": {
 		"qt": [],
 		"sdb-ft": [{
-			"title": "sdb-ft",
-			"from": "sdb",
-			"to": "ft",
-			"lessColor": "#ff0000",
-			"moreColor": "#0000ff",
-			"shap": "none",
-			"moreShap": "none",
+			"fillType": "default",
 			"isbetween": true,
-			"fillType": ""
+			"title": "sdb",
+			"lessColor": "rgba(255, 255, 255, 0)",
+			"shap": "none",
+			"from": "min",
+			"to": "sdb"
 		}],
 		"zs": [],
 		"dbjb-yxzs": []
+	},
+	"scatterstyle": {
+		"yxzs": "hLine",
+		"yxzs-5-1": "hLine",
+		"ys": "hLine",
+		"xdyhl": "hLine"
 	},
 	"headerHeight": 40,
 	"headerSetting": {
@@ -111,7 +103,8 @@
 		"dbjb": "对比级",
 		"yxzs-5-1": "油性指数",
 		"ys": "YS",
-		"xdyhl": "相当油含量"
+		"xdyhl": "相当油含量",
+		"JDG": "接单根"
 	},
 	"unit": {},
 	"lineWidth": {
@@ -248,6 +241,10 @@
 		"name": "离散数据图道c2644453-b732-48c8-f747-742f843b8dd6",
 		"visible": false,
 		"showChart": true
+	}, {
+		"name": "接单根7ea1687f-836c-5405-e7c9-60e92f8c064c",
+		"visible": false,
+		"showChart": true
 	}],
 	"headerSettings": [{
 		"showLeftBorder": true,
@@ -267,6 +264,12 @@
 		"showxAxis": true,
 		"showyAxis": true,
 		"isLog": true
+	}, {
+		"showLeftBorder": true,
+		"showRightBorder": true,
+		"showxAxis": true,
+		"showyAxis": true,
+		"isLog": false
 	}, {
 		"showLeftBorder": true,
 		"showRightBorder": true,

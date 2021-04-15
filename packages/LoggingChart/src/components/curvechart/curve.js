@@ -127,6 +127,7 @@ class curveChart extends BasicChart {
           name: t,
           turboThreshold: 0,
           data: seriesData,
+          zIndex: 1
         };
         series.push(Object.assign({}, seriesOpt, serie))
       }
@@ -138,7 +139,8 @@ class curveChart extends BasicChart {
         yAxis: t,
         data: points,
         turboThreshold: 0,
-        dashStyle: this.config.dashstyle[t]
+        dashStyle: this.config.dashstyle[t],
+        zIndex: 1
       };
 
       series.push(Object.assign({}, seriesOpt, serie));
